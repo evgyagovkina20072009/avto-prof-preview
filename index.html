@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Авто-Проф — автосервис в Тюмени</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="page" id="home">
+  <div class="landscape" aria-hidden="true"></div>
+  <div class="scene-shade" aria-hidden="true"></div>
+  <div class="composition">
+    <header class="site-header" aria-label="Шапка сайта">
+      <!-- Логотип по согласованному образцу: оригинальные силуэт и название, обновлённый слоган. -->
+      <div class="brand" role="img" aria-label="Авто-Проф. Ваши задачи - наше решение">
+        <span class="brand-art" aria-hidden="true"></span>
+        <span class="brand-slogan" aria-hidden="true">Ваши задачи - наше решение</span>
+      </div>
+      <nav class="main-nav" aria-label="Основное меню">
+        <button type="button" class="active" aria-current="page" data-panel="Главная">Главная</button>
+        <button type="button" data-panel="Услуги">Услуги</button>
+        <button type="button" data-panel="Цены">Цены</button>
+        <button type="button" data-panel="Отзывы">Отзывы</button>
+        <button type="button" data-panel="Контакты">Контакты</button>
+      </nav>
+    </header>
+
+    <section class="hero" aria-label="Автосервис Авто-Проф">
+      <div class="hero-locality">· СТО · Тюмень ·</div>
+      <h1>Авто-Проф</h1>
+      <svg class="hero-curve" viewBox="0 0 500 40" preserveAspectRatio="none" aria-hidden="true">
+        <defs><linearGradient id="curveGold" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#d79e3d"/><stop offset=".46" stop-color="#ffe2a2"/><stop offset="1" stop-color="#a76d26"/>
+        </linearGradient></defs>
+        <path d="M4 35 C117 2 215 1 321 18 C401 32 452 32 492 30 C429 37 387 35 318 25 C216 11 126 10 4 35Z" fill="url(#curveGold)"/>
+      </svg>
+
+    </section>
+
+    <section class="advantages" aria-label="Преимущества автосервиса">
+      <div class="advantage">
+        <svg class="adv-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M10 7a10 10 0 0 0 10 14L36 39a4 4 0 0 0 6-6L23 18A10 10 0 0 0 11 5l6 7-5 5-7-6a10 10 0 0 0 5-4Z"/><path d="M37 7 8 38m27-33 7 7-7 7m-27 17 5 5"/></svg>
+        <span>Опытные мастера</span>
+      </div>
+      <div class="advantage">
+        <svg class="adv-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="27" r="17"/><path d="M24 10V3m-8 0h16m-8 16v10l6 5M8 12l-4 4m36-4 4 4"/></svg>
+        <span>Быстро в срок</span>
+      </div>
+      <div class="advantage">
+        <svg class="adv-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 3 43 11v13c0 11-9 17-19 21C14 41 5 35 5 24V11Z"/><path d="m15 24 7 7 12-14"/></svg>
+        <span>Качественно с гарантией</span>
+      </div>
+      <div class="advantage">
+        <svg class="adv-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="m8 29 4-14c1-3 3-4 6-4h16c3 0 5 1 6 4l4 14M8 29h36v12h-7v-5H15v5H8zM10 28l-5-4m38 4 3-4M16 31h5m10 0h5"/></svg>
+        <span>Для всех марок авто</span>
+      </div>
+    </section>
+
+    <p class="hero-description">Профессиональное обслуживание<br>и ремонт легковых автомобилей</p>
+
+    <div class="actions">
+      <button type="button" class="action booking-cta" data-panel="Запись на СТО">
+        <svg class="cta-calendar-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18M7.5 14h3M7.5 17h3M14 14h2"/></svg>
+        <span>Записаться на СТО</span><span class="cta-arrow" aria-hidden="true">›</span>
+      </button>
+      <button type="button" class="action secondary" data-panel="Как мы работаем">
+        <svg class="play-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21"/><path d="m19 13 16 11-16 11Z"/></svg>
+        <span>Как мы работаем</span>
+      </button>
+    </div>
+  </div>
+</main>
+<div class="dialog" id="dialog" role="dialog" aria-modal="true" aria-labelledby="dt">
+<div class="panel" id="modal-panel">
+<h2 id="dt">
+</h2>
+<p id="desc">
+</p>
+<section id="booking" hidden aria-label="Демонстрационный календарь записи">
+<p class="booking-note">
+<strong>Демонстрация.</strong> Цветные точки и время — пример. Реальная занятость СТО пока не подключена, запись не отправляется.</p>
+<div class="booking-toolbar">
+<button type="button" class="booking-nav" id="cal-prev" aria-label="Предыдущий месяц">‹</button>
+<strong id="cal-month">
+</strong>
+<button type="button" class="booking-nav" id="cal-next" aria-label="Следующий месяц">›</button>
+</div>
+<div class="booking-days" id="cal-days">
+</div>
+<div class="booking-legend">
+<span>
+<i class="booking-dot free">
+</i>Есть время (пример)</span>
+<span>
+<i class="booking-dot few">
+</i>Мало мест (пример)</span>
+<span>
+<i class="booking-dot busy">
+</i>Нет мест (пример)</span>
+</div>
+<div class="booking-result" id="cal-result" aria-live="polite">
+<strong>Выбери дату</strong>Нажми на число с цветной точкой, чтобы посмотреть пример свободных часов.</div>
+</section>
+<section id="reviews" hidden aria-label="Отзывы клиентов">
+<p class="reviews-summary" id="reviews-summary"></p>
+<p id="reviews-empty">Опубликованных отзывов пока нет. Будем размещать реальные отзывы после проверки подлинности и модерации.</p>
+<ul class="review-list" id="review-list" aria-label="Опубликованные отзывы"></ul>
+<h3>Оставить отзыв — демонстрация</h3>
+<p class="review-note" id="review-demo-note">Отзыв не отправляется и не сохраняется. Это прототип формы: публикация и проверка отзывов ещё не подключены. Не вводите персональные данные.</p>
+<form class="review-form" id="review-form" aria-describedby="review-demo-note">
+<label>Имя или псевдоним<input name="author" maxlength="60" autocomplete="off" required></label>
+<fieldset><legend>Ваша оценка: от 1 до 5 звёзд</legend><div class="review-stars">
+<label><input type="radio" name="rating" value="1" required>1 ★</label><label><input type="radio" name="rating" value="2" required>2 ★</label><label><input type="radio" name="rating" value="3" required>3 ★</label><label><input type="radio" name="rating" value="4" required>4 ★</label><label><input type="radio" name="rating" value="5" required>5 ★</label>
+</div></fieldset>
+<label>Текст отзыва<textarea name="text" minlength="10" maxlength="2000" required></textarea></label>
+<button class="close" type="submit">Проверить заполнение (без отправки)</button>
+<p class="review-status review-note" id="review-status" role="status"></p>
+</form>
+<p class="review-note">Планируется проверка подлинности отзывов и модерация перед публикацией. Защита от спама будет включать серверную проверку данных, ограничение частоты отправки и проверку повторов. Сейчас приём отзывов отключён.</p>
+</section><button class="close" id="close">Вернуться на главную</button>
+</div>
+</div>
+
+<!-- Шаг 2: выбор времени и демонстрационная форма. Заявки никуда не отправляются. -->
+<div class="appointment-dialog" id="appointment-dialog" role="dialog" aria-modal="true" aria-labelledby="appointment-title" hidden>
+  <section class="appointment-panel">
+    <button class="appointment-x" id="appointment-close" type="button" aria-label="Закрыть окно записи">×</button>
+    <div class="appointment-kicker">Авто-Проф · Демонстрационная запись</div>
+    <h2 id="appointment-title">Выбор времени записи</h2>
+    <p class="appointment-date" id="appointment-date"></p>
+    <p class="appointment-disclaimer">Свободные часы указаны для примера. Дата и время не бронируются.</p>
+    <p class="appointment-section-title">Выберите свободный час</p>
+    <div id="appointment-times" class="appointment-times" role="group" aria-label="Доступное время"></div>
+    <form id="appointment-form" novalidate>
+      <div class="appointment-fields">
+        <label>Ваше имя <input name="name" type="text" autocomplete="name" placeholder="Как к вам обращаться" maxlength="80" required></label>
+        <label>Телефон <input name="phone" type="tel" autocomplete="tel" placeholder="+7 ..." maxlength="32" required></label>
+      </div>
+      <button class="appointment-submit" id="appointment-submit" type="submit" disabled>Проверить выбор (демо)</button>
+      <p class="appointment-feedback" id="appointment-feedback" role="status" aria-live="polite">Форма работает только для демонстрации: данные не отправляются и не сохраняются.</p>
+    </form>
+  </section>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
