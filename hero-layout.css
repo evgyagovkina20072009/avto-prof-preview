@@ -1,8 +1,8 @@
-/* Единая система координат утверждённого десктопного макета 1366 × 768.
-   Фон и фиксированный хедер не масштабируются. На телефонах wrapper не создаёт блока. */
+/* Approved desktop composition: 1366 x 768. Do not compress it to the browser viewport height.
+   When Chrome toolbars reduce visible height, the first section scrolls naturally. */
 .hero-reference-stage{display:contents}
 @media(min-width:761px){
-  #home.page{height:100dvh;min-height:0}
+  #home.page{height:max(100dvh,var(--hero-required-height,768px));min-height:var(--hero-required-height,768px)}
   #home .hero-reference-stage{display:block;position:absolute;left:50%;top:50%;width:1366px;height:768px;transform:translate(-50%,-50%) scale(var(--hero-reference-scale,1));transform-origin:center}
   #home .hero-reference-stage>.composition{position:relative;width:100%;height:100%;min-height:0}
   #home .hero{top:190px;left:4.7%;width:auto;max-width:600px}
