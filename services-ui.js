@@ -17,7 +17,9 @@
     const use=document.createElementNS(svgNS,'use');
     use.setAttribute('href','assets/service-icons.svg#'+service.id);
     icon.append(use);card.append(icon);
-    card.append(el('span','service-number',String(index+1).padStart(2,'0')),el('h3','',service.name),el('p','',service.description),link('Подробнее →',url(service),'service-more'));
+    const more=link('Подробнее →',url(service),'service-more');
+    more.dataset.serviceDetail=service.id;
+    card.append(el('span','service-number',String(index+1).padStart(2,'0')),el('h3','',service.name),el('p','',service.description),more);
     cards.append(card);
   });
   const results=document.getElementById('catalog-results');
