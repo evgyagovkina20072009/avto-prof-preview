@@ -1,5 +1,5 @@
-/* Scale the approved composition by available WIDTH only, never by Chrome window height.
-   Preserve its proportions; use natural vertical scroll for shorter desktop windows. */
+/* Preserve exact reference layout on desktop, regardless of browser window height.
+   Only narrower desktop windows use a proportional uniform scale. */
 (function(){
   const root=document.documentElement;
   function fitApprovedHero(){
@@ -10,7 +10,7 @@
     }
     const home=document.getElementById('home');
     const width=home?home.clientWidth:root.clientWidth;
-    const scale=Math.min(1,width/1366);
+    const scale=width>=1200?1:width/1366;
     root.style.setProperty('--hero-reference-scale',String(scale));
     root.style.setProperty('--hero-required-height',(768*scale)+'px');
   }
