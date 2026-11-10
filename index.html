@@ -257,5 +257,107 @@ document.addEventListener('keydown',event=>{
 },true);
 })();
 </script>
+
+<!-- Демонстрационный предпросмотр записи: никакие заявки не сохраняются. -->
+<style>
+#sto-booking-preview[hidden]{display:none!important}
+#sto-booking-preview{position:fixed;inset:0;z-index:1100;background:rgba(5,12,25,.84);display:flex;align-items:center;justify-content:center;padding:14px;backdrop-filter:blur(5px)}
+#sto-booking-preview .sto-preview-card{position:relative;box-sizing:border-box;width:min(850px,100%);max-height:calc(100dvh - 28px);overflow-y:auto;padding:25px;background:#172940;color:#fff;border:1px solid #bfa65e;border-radius:18px;box-shadow:0 28px 90px #000a;font-family:Arial,"Segoe UI",sans-serif}
+#sto-booking-preview h2{font-size:27px;line-height:1.2;color:#fff;margin:0 38px 8px 0}
+#sto-booking-preview .sto-note{font-size:13px;color:#bdcee1;margin:0 0 16px;line-height:1.5}
+#sto-booking-preview .sto-close{position:absolute;top:13px;right:17px;background:none;color:#fff;border:0;font-size:30px;cursor:pointer}
+#sto-booking-preview .sto-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#sto-booking-preview label{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:700;color:#f4f5f8}
+#sto-booking-preview input,#sto-booking-preview textarea{box-sizing:border-box;width:100%;border:1px solid #71849b;border-radius:9px;background:#0c1c32;color:#fff;padding:11px 12px;min-height:43px;font:normal 15px/1.4 Arial,sans-serif}
+#sto-booking-preview textarea{resize:vertical;min-height:72px}
+#sto-booking-preview .sto-reason{grid-column:1/-1}
+#sto-booking-preview .sto-time-heading{display:flex;justify-content:space-between;gap:8px;align-items:center;margin:17px 0 10px;font-size:15px;font-weight:700}
+#sto-booking-preview .sto-time-heading small{font-size:12px;color:#bdcee1;font-weight:400}
+#sto-booking-preview .sto-legend{display:flex;gap:16px;flex-wrap:wrap;margin:10px 0;color:#d4e2f4;font-size:12px}
+#sto-booking-preview .sto-legend span{display:inline-flex;align-items:center;gap:6px}
+#sto-booking-preview .sto-legend i{width:17px;height:7px;border-radius:4px;display:inline-block}
+#sto-booking-preview .sto-time-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+#sto-booking-preview .sto-time{background:#203955;border:1px solid #526b88;color:#fff;border-radius:10px;padding:11px 9px;text-align:left;cursor:pointer;font:inherit}
+#sto-booking-preview .sto-time:disabled{opacity:.62;cursor:not-allowed}
+#sto-booking-preview .sto-time[aria-pressed="true"]{border:2px solid #ffdb35;background:#2d4762;padding:10px 8px}
+#sto-booking-preview .sto-time strong{font-size:17px;display:block;margin-bottom:8px}
+#sto-booking-preview .sto-bars{display:flex;gap:3px;margin-bottom:7px}
+#sto-booking-preview .sto-bars i{flex:1;height:7px;border-radius:3px}
+#sto-booking-preview .sto-time small{font-size:11px;color:#dce7f7}
+#sto-booking-preview .sto-submit{border:0;border-radius:9px;background:#ffda29;color:#0e2440;padding:13px 20px;font-size:16px;font-weight:800;cursor:pointer;margin-top:15px;width:100%}
+#sto-booking-preview .sto-submit:disabled{opacity:.5;cursor:not-allowed}
+#sto-booking-preview .sto-feedback{font-size:13px;color:#ffe584;line-height:1.5;min-height:18px;margin:10px 0 0}
+@media(max-width:650px){#sto-booking-preview .sto-preview-card{padding:20px 14px}#sto-booking-preview .sto-fields{grid-template-columns:1fr}#sto-booking-preview .sto-time-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#sto-booking-preview h2{font-size:23px}}
+</style>
+<div id="sto-booking-preview" hidden role="dialog" aria-modal="true" aria-labelledby="sto-preview-title">
+ <section class="sto-preview-card">
+  <button class="sto-close" type="button" aria-label="Закрыть окно записи">×</button>
+  <h2 id="sto-preview-title">Записаться на СТО</h2>
+  <p class="sto-note">Авто-Проф · Демонстрационный макет. Записи и занятость условные; персональные данные не передаются и не сохраняются.</p>
+  <form id="sto-preview-form" novalidate>
+   <div class="sto-fields">
+    <label>Ваше имя <input type="text" name="client" autocomplete="off" placeholder="Введите имя" required maxlength="80"></label>
+    <label>Номер телефона <input type="tel" name="phone" autocomplete="off" placeholder="+7 (999) 000-00-00" required maxlength="30"></label>
+    <label class="sto-reason">Причина обращения (необязательно) <textarea name="reason" placeholder="Например: стук в подвеске, замена масла, диагностика двигателя..." maxlength="1000"></textarea></label>
+    <label class="sto-reason">Дата приезда <input type="date" name="date" required></label>
+   </div>
+   <div class="sto-time-heading"><span>Удобное время приезда</span><small>4 места на каждый час</small></div>
+   <div class="sto-legend"><span><i style="background:#397dd2"></i> Занято</span><span><i style="background:#ffda29"></i> Свободно</span></div>
+   <div class="sto-time-grid" id="sto-preview-times"></div>
+   <button class="sto-submit" type="submit">Проверить заявку (демо)</button>
+   <p class="sto-feedback" id="sto-preview-feedback" aria-live="polite">Выберите дату и свободное время. Реальная запись пока не подключена.</p>
+  </form>
+ </section>
+</div>
+<script>
+(function(){
+ const overlay=document.getElementById('sto-booking-preview');
+ const form=document.getElementById('sto-preview-form');
+ const date=form.elements.namedItem('date');
+ const times=document.getElementById('sto-preview-times');
+ const feedback=document.getElementById('sto-preview-feedback');
+ const close=overlay.querySelector('.sto-close');
+ let activeTime=null,previousFocus=null;
+ const today=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Yekaterinburg',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+ function count(dateStr,hour){
+  const day=Number(dateStr.slice(-2));
+  return (day*7+hour*3)%5;
+ }
+ function render(){
+  activeTime=null;times.replaceChildren();
+  const selected=date.value;
+  const now=today();
+  for(let hour=9;hour<=18;hour++){
+   const time=String(hour).padStart(2,'0')+':00',busy=count(selected||now,hour);
+   const button=document.createElement('button');
+   button.type='button';button.className='sto-time';button.disabled=!selected||selected<now||busy===4;
+   button.setAttribute('aria-pressed','false');
+   const title=document.createElement('strong');title.textContent=time;
+   const bars=document.createElement('span');bars.className='sto-bars';
+   for(let i=0;i<4;i++){let bar=document.createElement('i');bar.style.background=i<busy?'#397dd2':'#ffda29';bars.append(bar);}
+   const caption=document.createElement('small');caption.textContent=busy===4?'Все 4 места заняты':'Записано '+busy+' из 4';
+   button.append(title,bars,caption);
+   button.addEventListener('click',()=>{activeTime=time;times.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));feedback.textContent='Выбрано: '+selected+', '+time+'. Запись пока демонстрационная.';});
+   times.append(button);
+  }
+ }
+ function open(event){
+  if(event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+  event.preventDefault();event.stopImmediatePropagation();
+  previousFocus=event.target.closest('.booking-cta');
+  form.reset();date.min=today();date.value=today();
+  feedback.textContent='Выберите свободное время. Реальная запись пока не подключена.';
+  render();overlay.hidden=false;document.body.style.overflow='hidden';close.focus();
+ }
+ function hide(){overlay.hidden=true;document.body.style.overflow='';form.reset();activeTime=null;if(previousFocus)previousFocus.focus({preventScroll:true});}
+ document.addEventListener('click',event=>{if(event.target.closest('.booking-cta'))open(event)},true);
+ close.addEventListener('click',hide);
+ overlay.addEventListener('click',event=>{if(event.target===overlay)hide()});
+ document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!overlay.hidden){event.preventDefault();event.stopImmediatePropagation();hide()}},true);
+ date.addEventListener('change',()=>{render();feedback.textContent='Выберите свободное время. Данные условные.'});
+ form.addEventListener('submit',event=>{event.preventDefault();const name=form.elements.namedItem('client').value.trim(),phone=form.elements.namedItem('phone').value.trim();if(!name||!phone||!date.value||!activeTime){feedback.textContent='Для демонстрации укажите имя, телефон, дату и время.';return;}feedback.textContent='Демонстрация: '+date.value+' в '+activeTime+'. Заявка НЕ отправлена, данные НЕ сохранены.';});
+})();
+</script>
+
 </body>
 </html>
