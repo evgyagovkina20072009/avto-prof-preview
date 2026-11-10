@@ -4,7 +4,7 @@
 
 
 /* Навигация и информационное окно. */
-const info={'О нас':'Информация об автосервисе «Авто-Проф» будет добавлена после согласования с владельцем СТО.','Контакты':'Тюмень, Старый Тобольский тракт, 2-й километр, 4а, ворота №2. <a target="_blank" rel="noopener" href="https://2gis.ru/tyumen/geo/70000001099008590">Посмотреть на карте 2ГИС</a>. Телефоны: <a href="tel:+73452589058">+7 (3452) 58-90-58</a> и <a href="tel:+79224887700">+7 (922) 488-77-00</a>.','Запись на СТО':'Это демонстрационная версия. Форма записи будет подключена позже — заявки сейчас не отправляются.','Как мы работаем':'Здесь разместим подробности обслуживания и фотографии мастерской после согласования.'};
+const info={'О нас':'Информация об автосервисе «Авто-Проф» будет добавлена после согласования с владельцем СТО.','Заказ запчастей':'Форму заказа запасных частей настроим отдельно. Пока заявка не отправляется.','Контакты':'Тюмень, Старый Тобольский тракт, 2-й километр, 4а, ворота №2. <a target="_blank" rel="noopener" href="https://2gis.ru/tyumen/geo/70000001099008590">Посмотреть на карте 2ГИС</a>. Телефоны: <a href="tel:+73452589058">+7 (3452) 58-90-58</a> и <a href="tel:+79224887700">+7 (922) 488-77-00</a>.','Запись на СТО':'Это демонстрационная версия. Форма записи будет подключена позже — заявки сейчас не отправляются.','Как мы работаем':'Здесь разместим подробности обслуживания и фотографии мастерской после согласования.'};
 // Only genuine reviews approved for publication may be added here.
 // A future backend must enforce authenticity, moderation and spam checks server-side.
 const reviews=[];
@@ -104,7 +104,8 @@ document.addEventListener('click',event=>{
   reviewsSection.hidden=!isReviews;
   document.getElementById('modal-panel').classList.toggle('reviews-panel',isReviews);
   document.getElementById('desc').hidden=isReviews;
-  document.getElementById('desc').innerHTML=isReviews?'':info[section];
+  // The existing contacts dialog previously opened by the parts CTA now belongs to «О нас».
+  document.getElementById('desc').innerHTML=isReviews?'':(section==='О нас'?info['Контакты']:info[section]);
   if(isReviews) renderReviews();
   modal.classList.add('open');
   document.getElementById('close').focus({preventScroll:true});
