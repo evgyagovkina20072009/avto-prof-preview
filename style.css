@@ -382,3 +382,11 @@ button,a{font:inherit}button{cursor:pointer}
 
 /* Якорные ссылки меню оформляются точно как прежние пункты. */
 .main-nav a{text-decoration:none}
+
+/* Three clear sections inside the About information dialog. */
+#modal-panel.about-panel{max-width:460px;max-height:calc(100dvh - 30px);overflow-y:auto}
+#modal-panel.about-panel .about-section + .about-section{margin-top:22px}
+#modal-panel.about-panel .about-section h2{font-size:23px;line-height:1.2;font-weight:800;color:#fff;margin:0 0 9px}
+#modal-panel.about-panel .about-section p{font-size:16px;font-weight:400;line-height:1.55;margin:4px 0;color:#e2e6e9}
+#modal-panel.about-panel .about-section a{color:#f6cd8b;text-decoration:underline;text-underline-offset:3px}
+#modal-panel.about-panel .about-section a:focus-visible{outline:2px solid #ffe326;outline-offset:3px}
