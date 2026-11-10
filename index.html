@@ -260,6 +260,29 @@ document.addEventListener('keydown',event=>{
 
 <!-- Демонстрационный предпросмотр записи: никакие заявки не сохраняются. -->
 <style>
+/* Компактное окно записи для 1366×768: естественная типографика, без масштабирования. */
+@media (min-width:701px) and (min-height:650px){
+ #sto-booking-preview{padding:8px}
+ #sto-booking-preview .sto-preview-card{padding:14px 20px;max-height:calc(100dvh - 16px);overflow-y:auto}
+ #sto-booking-preview h2{font-size:23px;margin-bottom:3px}
+ #sto-booking-preview .sto-note{font-size:12px;line-height:1.3;margin-bottom:8px}
+ #sto-booking-preview .sto-fields{column-gap:12px;row-gap:7px}
+ #sto-booking-preview label{font-size:13px;gap:3px}
+ #sto-booking-preview input,#sto-booking-preview textarea{min-height:36px;padding:7px 10px;font-size:14px;line-height:1.3}
+ #sto-booking-preview textarea{min-height:48px;height:48px}
+ #sto-booking-preview .sto-time-heading{margin:9px 0 5px;font-size:14px}
+ #sto-booking-preview .sto-legend{margin:4px 0 7px}
+ #sto-booking-preview .sto-time-grid{gap:7px}
+ #sto-booking-preview .sto-time{padding:7px 9px}
+ #sto-booking-preview .sto-time[aria-pressed="true"]{padding:6px 8px}
+ #sto-booking-preview .sto-time strong{font-size:16px;margin-bottom:4px}
+ #sto-booking-preview .sto-bars{margin-bottom:4px}
+ #sto-booking-preview .sto-bars i{height:6px}
+ #sto-booking-preview .sto-time[aria-pressed="true"]::after{margin-top:3px}
+ #sto-booking-preview .sto-selected{margin-top:8px;padding:7px 10px;font-size:13px}
+ #sto-booking-preview .sto-submit{margin-top:8px;padding:9px 15px;font-size:15px}
+ #sto-booking-preview .sto-feedback{margin-top:5px;font-size:12px}
+}
 #sto-booking-preview[hidden]{display:none!important}
 #sto-booking-preview{position:fixed;inset:0;z-index:1100;background:rgba(5,12,25,.84);display:flex;align-items:center;justify-content:center;padding:14px;backdrop-filter:blur(5px)}
 #sto-booking-preview .sto-preview-card{position:relative;box-sizing:border-box;width:min(850px,100%);max-height:calc(100dvh - 28px);overflow-y:auto;padding:25px;background:#172940;color:#fff;border:1px solid #bfa65e;border-radius:18px;box-shadow:0 28px 90px #000a;font-family:Arial,"Segoe UI",sans-serif}
