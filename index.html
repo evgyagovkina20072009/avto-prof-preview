@@ -260,6 +260,19 @@ document.addEventListener('keydown',event=>{
 
 <!-- Демонстрационный предпросмотр записи: никакие заявки не сохраняются. -->
 <style>
+#sto-booking-preview .sto-review[hidden],#sto-booking-preview .sto-success[hidden]{display:none!important}
+#sto-booking-preview .sto-review{border:1px solid #d4b556;border-radius:10px;margin-top:10px;padding:12px;color:#fff;background:#213b56}
+#sto-booking-preview .sto-review h3{font-size:16px;color:#ffda29;margin:0 0 7px}
+#sto-booking-preview .sto-review-details-line{font-size:13px;line-height:1.4;margin:3px 0;overflow-wrap:anywhere}
+#sto-booking-preview .sto-review-actions{display:flex;gap:10px;margin-top:9px}
+#sto-booking-preview .sto-review-actions button{flex:1;border:1px solid #cbb36d;background:#ffda29;color:#12273c;padding:9px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700}
+#sto-booking-preview .sto-review-actions #sto-edit{background:#29465f;color:#fff}
+#sto-booking-preview .sto-success{text-align:center;border:1px solid #487f5e;border-radius:12px;background:#1f3d44;padding:15px 12px;margin-top:10px}
+#sto-booking-preview .sto-success-check{display:inline-grid;place-items:center;border-radius:50%;width:45px;height:45px;background:#2fa96a;color:white;font-size:28px;font-weight:bold}
+#sto-booking-preview .sto-success h3{font-size:22px;color:#fff;margin:8px 0}
+#sto-booking-preview .sto-success p{font-size:14px;margin:6px 0}
+#sto-booking-preview .sto-success small{display:block;font-size:11px;line-height:1.4;color:#bdd0dc;margin-top:10px}
+@media(max-width:570px){#sto-booking-preview .sto-review-actions{flex-direction:column}}
 #sto-booking-preview[hidden]{display:none!important}
 #sto-booking-preview{position:fixed;inset:0;z-index:1100;background:rgba(5,12,25,.84);display:flex;align-items:center;justify-content:center;padding:14px;backdrop-filter:blur(5px)}
 #sto-booking-preview .sto-preview-card{position:relative;box-sizing:border-box;width:min(850px,100%);max-height:calc(100dvh - 28px);overflow-y:auto;padding:25px;background:#172940;color:#fff;border:1px solid #bfa65e;border-radius:18px;box-shadow:0 28px 90px #000a;font-family:Arial,"Segoe UI",sans-serif}
@@ -331,7 +344,18 @@ document.addEventListener('keydown',event=>{
    <div class="sto-legend"><span><i style="background:#397dd2"></i> Занято</span><span><i style="background:#ffda29"></i> Свободно</span></div>
    <div class="sto-time-grid" id="sto-preview-times"></div>
    <div class="sto-selected" id="sto-preview-selected" role="status" aria-live="polite">Дата и время приезда: <strong>время ещё не выбрано</strong></div>
-   <button class="sto-submit" type="submit">Проверить заявку (демо)</button>
+   <button class="sto-submit" type="submit">Проверить данные заявки</button>
+   <div id="sto-review" class="sto-review" hidden>
+    <h3>Проверьте данные заявки</h3><div id="sto-review-details"></div>
+    <div class="sto-review-actions"><button type="button" id="sto-edit">Изменить данные</button><button type="button" id="sto-send">Отправить заявку (демо)</button></div>
+   </div>
+   <div id="sto-success" class="sto-success" hidden role="status" aria-live="polite">
+     <span class="sto-success-check" aria-hidden="true">✓</span>
+     <h3>Заявка принята!</h3>
+     <p>С вами свяжется менеджер в ближайшее время.</p>
+     <p>Благодарим за обращение!</p>
+     <small>Демонстрация: запись не отправлена, не сохранена и не бронирует время на СТО.</small>
+   </div>
    <p class="sto-feedback" id="sto-preview-feedback" aria-live="polite">Выберите дату и свободное время. Реальная запись пока не подключена.</p>
   </form>
  </section>
@@ -346,6 +370,16 @@ document.addEventListener('keydown',event=>{
  const selectedSummary=document.getElementById('sto-preview-selected');
  function updateSummary(){selectedSummary.replaceChildren();selectedSummary.append(document.createTextNode('Дата и время приезда: '));const strong=document.createElement('strong');strong.textContent=date.value && activeTime ? date.value+' в '+activeTime : 'время ещё не выбрано';selectedSummary.append(strong);}
  const close=overlay.querySelector('.sto-close');
+ const review=document.getElementById('sto-review');
+ const reviewDetails=document.getElementById('sto-review-details');
+ const success=document.getElementById('sto-success');
+ const edit=document.getElementById('sto-edit');
+ const send=document.getElementById('sto-send');
+ const checkButton=form.querySelector('.sto-submit');
+ function resetResult(){review.hidden=true;success.hidden=true;checkButton.hidden=false;}
+ function setReviewLine(label,value){const p=document.createElement('p');p.className='sto-review-details-line';const strong=document.createElement('strong');strong.textContent=label+': ';p.append(strong,document.createTextNode(value));reviewDetails.append(p);}
+ edit.addEventListener('click',()=>{resetResult();feedback.textContent='Исправьте данные и повторно проверьте заявку.';});
+ send.addEventListener('click',()=>{review.hidden=true;checkButton.hidden=true;success.hidden=false;feedback.textContent='Это пример подтверждения. Для реальной записи требуется подключение серверного сохранения.';});
  let activeTime=null,previousFocus=null;
  const today=()=>{const p=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Yekaterinburg',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date()).filter(x=>x.type!=='literal').map(x=>[x.type,x.value]));return p.year+'-'+p.month+'-'+p.day;};
  function count(dateStr,hour){
@@ -375,17 +409,27 @@ document.addEventListener('keydown',event=>{
   if(event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
   event.preventDefault();event.stopImmediatePropagation();
   previousFocus=event.target.closest('.booking-cta');
-  form.reset();date.min=today();date.value=today();
+  form.reset();resetResult();date.min=today();date.value=today();
   feedback.textContent='Выберите свободное время. Реальная запись пока не подключена.';
   render();overlay.hidden=false;document.body.style.overflow='hidden';close.focus();
  }
- function hide(){overlay.hidden=true;document.body.style.overflow='';form.reset();activeTime=null;if(previousFocus)previousFocus.focus({preventScroll:true});}
+ function hide(){overlay.hidden=true;document.body.style.overflow='';form.reset();resetResult();activeTime=null;if(previousFocus)previousFocus.focus({preventScroll:true});}
  window.addEventListener('click',event=>{if(event.target.closest('.booking-cta'))open(event)},true);
  close.addEventListener('click',hide);
  overlay.addEventListener('click',event=>{if(event.target===overlay)hide()});
  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!overlay.hidden){event.preventDefault();event.stopImmediatePropagation();hide()}},true);
- date.addEventListener('change',()=>{render();feedback.textContent='Выберите свободное время. Данные условные.'});
- form.addEventListener('submit',event=>{event.preventDefault();const name=form.elements.namedItem('client').value.trim(),phone=form.elements.namedItem('phone').value.trim();if(!name||!phone||!date.value||!activeTime){feedback.textContent='Для демонстрации укажите имя, телефон, дату и время.';return;}feedback.textContent='Демонстрация: '+date.value+' в '+activeTime+'. Заявка НЕ отправлена, данные НЕ сохранены.';});
+ date.addEventListener('change',()=>{resetResult();render();feedback.textContent='Выберите свободное время. Данные условные.'});
+ form.addEventListener('submit',event=>{
+  event.preventDefault();
+  const name=form.elements.namedItem('client').value.trim(),phone=form.elements.namedItem('phone').value.trim();
+  if(!name||!phone||!date.value||!activeTime){feedback.textContent='Укажите имя, телефон, дату и время для проверки заявки.';return;}
+  reviewDetails.replaceChildren();
+  setReviewLine('Имя',name);setReviewLine('Телефон',phone);
+  setReviewLine('Причина обращения',form.elements.namedItem('reason').value.trim()||'Не указана');
+  setReviewLine('Дата приезда',date.value);setReviewLine('Время приезда',activeTime);
+  success.hidden=true;review.hidden=false;checkButton.hidden=true;
+  feedback.textContent='Проверьте данные. Кнопка «Отправить заявку (демо)» не отправляет сведения и не сохраняет запись.';
+ });
 })();
 </script>
 
