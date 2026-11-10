@@ -350,7 +350,7 @@ document.addEventListener('keydown',event=>{
   render();overlay.hidden=false;document.body.style.overflow='hidden';close.focus();
  }
  function hide(){overlay.hidden=true;document.body.style.overflow='';form.reset();activeTime=null;if(previousFocus)previousFocus.focus({preventScroll:true});}
- document.addEventListener('click',event=>{if(event.target.closest('.booking-cta'))open(event)},true);
+ window.addEventListener('click',event=>{if(event.target.closest('.booking-cta'))open(event)},true);
  close.addEventListener('click',hide);
  overlay.addEventListener('click',event=>{if(event.target===overlay)hide()});
  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!overlay.hidden){event.preventDefault();event.stopImmediatePropagation();hide()}},true);
