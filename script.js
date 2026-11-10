@@ -4,7 +4,7 @@
 
 
 /* Навигация и информационное окно. */
-const info={'Услуги':'Перечень услуг добавим после согласования с владельцем СТО.','Цены':'Прайс-лист пока уточняется.','Контакты':'Тюмень, Старый Тобольский тракт, 2-й километр, 4а, ворота №2. <a target="_blank" rel="noopener" href="https://2gis.ru/tyumen/geo/70000001099008590">Посмотреть на карте 2ГИС</a>. Телефоны: <a href="tel:+73452589058">+7 (3452) 58-90-58</a> и <a href="tel:+79224887700">+7 (922) 488-77-00</a>.','Запись на СТО':'Это демонстрационная версия. Форма записи будет подключена позже — заявки сейчас не отправляются.','Как мы работаем':'Здесь разместим подробности обслуживания и фотографии мастерской после согласования.'};
+const info={'О нас':'Информация об автосервисе «Авто-Проф» будет добавлена после согласования с владельцем СТО.','Контакты':'Тюмень, Старый Тобольский тракт, 2-й километр, 4а, ворота №2. <a target="_blank" rel="noopener" href="https://2gis.ru/tyumen/geo/70000001099008590">Посмотреть на карте 2ГИС</a>. Телефоны: <a href="tel:+73452589058">+7 (3452) 58-90-58</a> и <a href="tel:+79224887700">+7 (922) 488-77-00</a>.','Запись на СТО':'Это демонстрационная версия. Форма записи будет подключена позже — заявки сейчас не отправляются.','Как мы работаем':'Здесь разместим подробности обслуживания и фотографии мастерской после согласования.'};
 // Only genuine reviews approved for publication may be added here.
 // A future backend must enforce authenticity, moderation and spam checks server-side.
 const reviews=[];
@@ -58,11 +58,42 @@ function closeModal(){
 function goHome(){
   closeModal();
   window.scrollTo({top:0,left:0,behavior:'instant'});
-  home.focus({preventScroll:true});
+  if(home) home.focus({preventScroll:true});
 }
-document.querySelectorAll('[data-panel]').forEach(button=>button.addEventListener('click',()=>{
+// Общие якоря единого лендинга; визуальные блоки остаются без изменений.
+function scrollToLandingSection(id,behavior){
+  const target=document.getElementById(id);
+  if(!target) return false;
+  closeModal();
+  const motion=behavior||(window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth');
+  if(id==='home') window.scrollTo({top:0,left:0,behavior:motion});
+  else target.scrollIntoView({behavior:motion,block:'start'});
+  const focusTarget=id==='home'?home:document.getElementById('services-title');
+  if(focusTarget) focusTarget.focus({preventScroll:true});
+  setActive(id==='home'?'Главная':'Услуги и цены');
+  return true;
+}
+function updateLandingHash(id){
+  const hash='#'+id;
+  if(window.location.hash!==hash) window.history.pushState(null,'',hash);
+}
+document.addEventListener('click',event=>{
+  const button=event.target.closest('[data-panel]');
+  if(!button) return;
+  if(button.tagName==='A'&&(event.metaKey||event.ctrlKey||event.shiftKey||event.altKey||event.button!==0)) return;
+  event.preventDefault();
   const section=button.dataset.panel;
-  if(section==='Главная'){goHome();return;}
+  if(section==='Главная'){
+    if(scrollToLandingSection('home')){if(button.tagName==='A') updateLandingHash('home');}
+    else goHome();
+    return;
+  }
+  if(section==='Услуги'||section==='Услуги и цены'){
+    if(scrollToLandingSection('services')){if(button.tagName==='A') updateLandingHash('services');}
+    else window.location.href='services.html';
+    return;
+  }
+  if(section==='Цены'){window.location.href='services.html';return;}
   opener=button;
   setActive(section);
   closeReviewsView();
@@ -77,8 +108,8 @@ document.querySelectorAll('[data-panel]').forEach(button=>button.addEventListene
   if(isReviews) renderReviews();
   modal.classList.add('open');
   document.getElementById('close').focus({preventScroll:true});
-}));
-document.getElementById('close').onclick=goHome;
+});
+document.getElementById('close').onclick=document.body.dataset.innerPage?closeModal:goHome;
 modal.onclick=event=>{if(event.target===modal) closeModal()};
 document.addEventListener('keydown',event=>{if(event.key==='Escape' && modal.classList.contains('open')) closeModal()});
 
@@ -216,3 +247,11 @@ document.addEventListener('keydown',event=>{if(event.key==='Escape' && modal.cla
     document.getElementById('modal-panel').classList.remove('booking-wide');
   };
 })();
+
+// Прямые ссылки и возврат по истории учитывают высоту закреплённого хедера.
+function restoreLandingAnchor(){
+  const id=window.location.hash.slice(1);
+  if(id==='home'||id==='services') scrollToLandingSection(id,'instant');
+}
+window.addEventListener('load',restoreLandingAnchor);
+window.addEventListener('hashchange',restoreLandingAnchor);

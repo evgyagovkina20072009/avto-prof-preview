@@ -5,72 +5,108 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Авто-Проф — автосервис в Тюмени</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="services.css">
+<link rel="stylesheet" href="visual-depth.css">
+<link rel="stylesheet" href="header.css">
+<link rel="icon" href="data:,">
 </head>
 <body>
+    <header class="site-header" aria-label="Шапка сайта">
+      <!-- Постоянный логотип: шестерёнка и название из новой визитки. -->
+      <div class="brand" role="img" aria-label="АвтоПроф. Ваши задачи — наше решение">
+        <span class="brand-art" aria-hidden="true"></span>
+        <span class="brand-slogan" aria-hidden="true">Ваши задачи — наше решение</span>
+      </div>
+      <div class="header-side">
+      <nav class="main-nav" aria-label="Основное меню">
+        <a href="#home" class="active" aria-current="page" data-panel="Главная">Главная</a>
+        <button type="button" data-panel="О нас">О нас</button>
+        <a href="#services" data-panel="Услуги и цены">Услуги и цены</a>
+        <button type="button" data-panel="Отзывы">Отзывы</button>
+      </nav>
+      <div class="header-phones" aria-label="Телефоны Авто-Проф">
+        <span class="header-phone-icon" aria-hidden="true"></span>
+        <div class="header-phone-numbers"><a href="tel:+79829476558">+7 982-947-65-58</a><a href="tel:+79923106270">+7 992-310-62-70</a></div>
+      </div>
+      </div>
+    </header>
 <main class="page" id="home">
+  <div class="car-art" role="img" aria-label="Синий Subaru в жёлтой раллийной ливрее с золотыми дисками"><span class="car-light" aria-hidden="true"></span><span class="car-smoke" aria-hidden="true"></span></div>
   <div class="landscape" aria-hidden="true"></div>
   <div class="scene-shade" aria-hidden="true"></div>
   <div class="composition">
-    <header class="site-header" aria-label="Шапка сайта">
-      <!-- Логотип по согласованному образцу: оригинальные силуэт и название, обновлённый слоган. -->
-      <div class="brand" role="img" aria-label="Авто-Проф. Ваши задачи - наше решение">
-        <span class="brand-art" aria-hidden="true"></span>
-        <span class="brand-slogan" aria-hidden="true">Ваши задачи - наше решение</span>
-      </div>
-      <nav class="main-nav" aria-label="Основное меню">
-        <button type="button" class="active" aria-current="page" data-panel="Главная">Главная</button>
-        <button type="button" data-panel="Услуги">Услуги</button>
-        <button type="button" data-panel="Цены">Цены</button>
-        <button type="button" data-panel="Отзывы">Отзывы</button>
-        <button type="button" data-panel="Контакты">Контакты</button>
-      </nav>
-    </header>
+
 
     <section class="hero" aria-label="Автосервис Авто-Проф">
       <div class="hero-locality">· СТО · Тюмень ·</div>
-      <h1>Авто-Проф</h1>
-      <svg class="hero-curve" viewBox="0 0 500 40" preserveAspectRatio="none" aria-hidden="true">
-        <defs><linearGradient id="curveGold" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0" stop-color="#d79e3d"/><stop offset=".46" stop-color="#ffe2a2"/><stop offset="1" stop-color="#a76d26"/>
-        </linearGradient></defs>
-        <path d="M4 35 C117 2 215 1 321 18 C401 32 452 32 492 30 C429 37 387 35 318 25 C216 11 126 10 4 35Z" fill="url(#curveGold)"/>
-      </svg>
+      <h1 class="hero-wordmark"><span class="visually-hidden">Авто-Проф</span><img src="assets/avtoprof-wordmark.svg" alt="" width="1845" height="414"></h1>
+
 
     </section>
 
-    <section class="advantages" aria-label="Преимущества автосервиса">
-      <div class="advantage">
-        <svg class="adv-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M10 7a10 10 0 0 0 10 14L36 39a4 4 0 0 0 6-6L23 18A10 10 0 0 0 11 5l6 7-5 5-7-6a10 10 0 0 0 5-4Z"/><path d="M37 7 8 38m27-33 7 7-7 7m-27 17 5 5"/></svg>
-        <span>Опытные мастера</span>
+
+
+    <section class="service-blocks" aria-label="Ремонт и заказ запчастей">
+      <div class="service-block">
+        <span class="service-icon service-icon-repair" aria-hidden="true"></span>
+        <p><strong>Ремонт и техобслуживание</strong> легковых автомобилей</p>
       </div>
-      <div class="advantage">
-        <svg class="adv-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="27" r="17"/><path d="M24 10V3m-8 0h16m-8 16v10l6 5M8 12l-4 4m36-4 4 4"/></svg>
-        <span>Быстро в срок</span>
-      </div>
-      <div class="advantage">
-        <svg class="adv-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 3 43 11v13c0 11-9 17-19 21C14 41 5 35 5 24V11Z"/><path d="m15 24 7 7 12-14"/></svg>
-        <span>Качественно с гарантией</span>
-      </div>
-      <div class="advantage">
-        <svg class="adv-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="m8 29 4-14c1-3 3-4 6-4h16c3 0 5 1 6 4l4 14M8 29h36v12h-7v-5H15v5H8zM10 28l-5-4m38 4 3-4M16 31h5m10 0h5"/></svg>
-        <span>Для всех марок авто</span>
+      <div class="service-block">
+        <span class="service-icon service-icon-parts" aria-hidden="true"></span>
+        <p><strong>Стол заказов</strong> запасных частей — наличие и под заказ</p>
       </div>
     </section>
-
-    <p class="hero-description">Профессиональное обслуживание<br>и ремонт легковых автомобилей</p>
 
     <div class="actions">
-      <button type="button" class="action booking-cta" data-panel="Запись на СТО">
+      <button type="button" class="action booking-cta" data-panel="Услуги">
         <svg class="cta-calendar-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18M7.5 14h3M7.5 17h3M14 14h2"/></svg>
         <span>Записаться на СТО</span><span class="cta-arrow" aria-hidden="true">›</span>
       </button>
-      <button type="button" class="action secondary" data-panel="Как мы работаем">
-        <svg class="play-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21"/><path d="m19 13 16 11-16 11Z"/></svg>
-        <span>Как мы работаем</span>
-      </button>
+      <button type="button" class="action parts-cta" data-panel="Контакты"><span>Заказ запчастей</span><span class="cta-arrow" aria-hidden="true">›</span></button>
     </div>
   </div>
 </main>
+<div id="home-content">
+<section class="benefits-screen" aria-labelledby="benefits-title">
+  <div class="benefits-inner">
+    <h2 id="benefits-title">Почему выбирают нас</h2>
+    <section class="advantages" aria-label="Преимущества автосервиса">
+      <div class="advantage">
+        <svg class="adv-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="m12 10 8 8-5 5-8-8a10 10 0 0 0 12 13l16 15 7-7-16-15A10 10 0 0 0 12 10Z"/><path d="m31 11 6-5 6 6-5 6M10 38l9-9"/></svg>
+        <span>Опытные мастера</span>
+      </div>
+      <div class="advantage">
+        <svg class="adv-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="26" r="17"/><path d="M24 16v11l7 4M18 4h12M24 4v5"/></svg>
+        <span>Быстро и в срок</span>
+      </div>
+      <div class="advantage">
+        <svg class="adv-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="m24 4 17 7v13c0 10-9 17-17 20C16 41 7 34 7 24V11Z"/><path d="m15 24 6 6 13-14"/></svg>
+        <span>Качественно с гарантией</span>
+      </div>
+      <div class="advantage">
+        <svg class="adv-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="m9 28 4-13h22l4 13M7 28h34v12h-7v-5H14v5H7ZM15 15l-3 13m21-13 3 13M13 31h5m12 0h5"/></svg>
+        <span>Для всех марок авто</span>
+      </div>
+    </section>
+  </div>
+</section>
+<section class="services-section" id="services" aria-labelledby="services-title">
+  <div class="services-heading"><div><h2 id="services-title" tabindex="-1">Наши услуги</h2></div><p>Выберите направление, чтобы узнать состав работ и перейти к записи</p></div>
+  <div class="service-cards" id="service-cards"></div>
+  <div class="services-actions">
+
+    <a class="service-button all-services" href="services.html">Все услуги и цены <span aria-hidden="true">→</span></a>
+  </div>
+  <noscript><p>Для просмотра каталога включите JavaScript. <a href="services.html">Все услуги и цены</a></p></noscript>
+</section>
+</div>
+<footer class="site-footer" id="contacts">
+  <strong class="footer-brand">Авто-Проф</strong>
+  <address>Тюмень, Старый Тобольский тракт, 2-й километр, 4а, ворота №2</address>
+  <a href="#contacts" data-panel="Контакты">Контакты</a>
+  <small>© 2026 «Авто-Проф»</small>
+</footer>
+
 <div class="dialog" id="dialog" role="dialog" aria-modal="true" aria-labelledby="dt">
 <div class="panel" id="modal-panel">
 <h2 id="dt">
@@ -143,6 +179,8 @@
   </section>
 </div>
 
+<script src="services-data.js"></script>
+<script src="services-ui.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

@@ -1,0 +1,80 @@
+<!doctype html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Услуги и цены — Авто-Проф</title><link rel="icon" href="data:,"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="services.css"><link rel="stylesheet" href="visual-depth.css"></head><body class="inner-page" data-inner-page="true" data-service="diagnostics"><header class="catalog-header"><a class="catalog-logo" href="index.html" aria-label="Авто-Проф — главная"><img src="assets/avtoprof-logo-transparent.png" alt="АвтоПроф" width="190" height="65"></a><nav aria-label="Основное меню"><a href="index.html">Главная</a><a href="services.html" aria-current="page">Услуги и цены</a><button type="button" data-panel="Отзывы">Отзывы</button><button type="button" data-panel="Контакты">Контакты</button></nav></header><main class="catalog-main" id="service-detail"><a class="back-link" href="services.html">← Вернуться к услугам</a><p class="section-kicker" id="detail-category"></p><h1 id="detail-title">Услуга</h1><div class="detail-layout"><section class="detail-copy"><p class="catalog-intro" id="detail-description"></p><h2>Перечень выполняемых работ</h2><ul id="detail-works"></ul><p class="price-note">Предварительный перечень. Необходимые работы согласовываются после диагностики</p></section><aside class="detail-booking" aria-label="Стоимость и запись"><span>Стоимость</span><p class="detail-price" id="detail-price"></p><p>Цена уточняется</p><p class="price-note">0 ₽ — временное значение, а не бесплатная услуга</p><button type="button" class="service-button" data-panel="Запись на СТО">Записаться на СТО</button><p class="booking-demo-label">Откроется демонстрационный календарь. Заявки пока не отправляются</p></aside></div><noscript>Для просмотра описания и записи включите JavaScript.</noscript></main><footer class="site-footer" id="contacts">
+  <strong class="footer-brand">Авто-Проф</strong>
+  <address>Тюмень, Старый Тобольский тракт, 2-й километр, 4а, ворота №2</address>
+  <a href="#contacts" data-panel="Контакты">Контакты</a>
+  <small>© 2026 «Авто-Проф»</small>
+</footer>
+
+<div class="dialog" id="dialog" role="dialog" aria-modal="true" aria-labelledby="dt">
+<div class="panel" id="modal-panel">
+<h2 id="dt">
+</h2>
+<p id="desc">
+</p>
+<section id="booking" hidden aria-label="Демонстрационный календарь записи">
+<p class="booking-note">
+<strong>Демонстрация.</strong> Цветные точки и время — пример. Реальная занятость СТО пока не подключена, запись не отправляется.</p>
+<div class="booking-toolbar">
+<button type="button" class="booking-nav" id="cal-prev" aria-label="Предыдущий месяц">‹</button>
+<strong id="cal-month">
+</strong>
+<button type="button" class="booking-nav" id="cal-next" aria-label="Следующий месяц">›</button>
+</div>
+<div class="booking-days" id="cal-days">
+</div>
+<div class="booking-legend">
+<span>
+<i class="booking-dot free">
+</i>Есть время (пример)</span>
+<span>
+<i class="booking-dot few">
+</i>Мало мест (пример)</span>
+<span>
+<i class="booking-dot busy">
+</i>Нет мест (пример)</span>
+</div>
+<div class="booking-result" id="cal-result" aria-live="polite">
+<strong>Выбери дату</strong>Нажми на число с цветной точкой, чтобы посмотреть пример свободных часов.</div>
+</section>
+<section id="reviews" hidden aria-label="Отзывы клиентов">
+<p class="reviews-summary" id="reviews-summary"></p>
+<p id="reviews-empty">Опубликованных отзывов пока нет. Будем размещать реальные отзывы после проверки подлинности и модерации.</p>
+<ul class="review-list" id="review-list" aria-label="Опубликованные отзывы"></ul>
+<h3>Оставить отзыв — демонстрация</h3>
+<p class="review-note" id="review-demo-note">Отзыв не отправляется и не сохраняется. Это прототип формы: публикация и проверка отзывов ещё не подключены. Не вводите персональные данные.</p>
+<form class="review-form" id="review-form" aria-describedby="review-demo-note">
+<label>Имя или псевдоним<input name="author" maxlength="60" autocomplete="off" required></label>
+<fieldset><legend>Ваша оценка: от 1 до 5 звёзд</legend><div class="review-stars">
+<label><input type="radio" name="rating" value="1" required>1 ★</label><label><input type="radio" name="rating" value="2" required>2 ★</label><label><input type="radio" name="rating" value="3" required>3 ★</label><label><input type="radio" name="rating" value="4" required>4 ★</label><label><input type="radio" name="rating" value="5" required>5 ★</label>
+</div></fieldset>
+<label>Текст отзыва<textarea name="text" minlength="10" maxlength="2000" required></textarea></label>
+<button class="close" type="submit">Проверить заполнение (без отправки)</button>
+<p class="review-status review-note" id="review-status" role="status"></p>
+</form>
+<p class="review-note">Планируется проверка подлинности отзывов и модерация перед публикацией. Защита от спама будет включать серверную проверку данных, ограничение частоты отправки и проверку повторов. Сейчас приём отзывов отключён.</p>
+</section><button class="close" id="close">Закрыть</button>
+</div>
+</div>
+
+<!-- Шаг 2: выбор времени и демонстрационная форма. Заявки никуда не отправляются. -->
+<div class="appointment-dialog" id="appointment-dialog" role="dialog" aria-modal="true" aria-labelledby="appointment-title" hidden>
+  <section class="appointment-panel">
+    <button class="appointment-x" id="appointment-close" type="button" aria-label="Закрыть окно записи">×</button>
+    <div class="appointment-kicker">Авто-Проф · Демонстрационная запись</div>
+    <h2 id="appointment-title">Выбор времени записи</h2>
+    <p class="appointment-date" id="appointment-date"></p>
+    <p class="appointment-disclaimer">Свободные часы указаны для примера. Дата и время не бронируются.</p>
+    <p class="appointment-section-title">Выберите свободный час</p>
+    <div id="appointment-times" class="appointment-times" role="group" aria-label="Доступное время"></div>
+    <form id="appointment-form" novalidate>
+      <div class="appointment-fields">
+        <label>Ваше имя <input name="name" type="text" autocomplete="name" placeholder="Как к вам обращаться" maxlength="80" required></label>
+        <label>Телефон <input name="phone" type="tel" autocomplete="tel" placeholder="+7 ..." maxlength="32" required></label>
+      </div>
+      <button class="appointment-submit" id="appointment-submit" type="submit" disabled>Проверить выбор (демо)</button>
+      <p class="appointment-feedback" id="appointment-feedback" role="status" aria-live="polite">Форма работает только для демонстрации: данные не отправляются и не сохраняются.</p>
+    </form>
+  </section>
+</div>
+
+<script src="services-data.js"></script><script src="services-ui.js"></script><script src="script.js"></script></body></html>

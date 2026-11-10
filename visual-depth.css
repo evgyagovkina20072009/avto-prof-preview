@@ -1,0 +1,30 @@
+/* Умеренный объём только контента и основных кнопок. Хедер исключён. */
+.page .action,
+.services-section .service-button,
+.catalog-main .service-button {
+  box-shadow:inset 0 1px 0 #ffffff66,0 3px 0 #020c254d,0 8px 18px #02091745;
+}
+.page .action:hover,
+.services-section .service-button:hover,
+.catalog-main .service-button:hover {
+  box-shadow:inset 0 1px 0 #ffffff80,0 4px 0 #020c2540,0 10px 22px #02091755;
+}
+.page .action:active,
+.services-section .service-button:active,
+.catalog-main .service-button:active {
+  transform:translateY(1px);
+  box-shadow:inset 0 1px 0 #ffffff55,0 1px 0 #020c2533,0 4px 10px #02091740;
+}
+.hero h1 {filter:drop-shadow(0 3px 2px #020a1d55)}
+.service-block p,
+.benefits-screen h2,
+.services-heading h2,
+.service-card h3,
+.catalog-main h1,
+.catalog-group h2,
+.detail-copy h2 {
+  text-shadow:0 2px 3px #020a1d70;
+}
+@media(prefers-reduced-motion:reduce){
+  .page .action:active,.services-section .service-button:active,.catalog-main .service-button:active{transform:none}
+}

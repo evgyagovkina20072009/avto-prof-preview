@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 186.697 512 310.303" preserveAspectRatio="none">
+  <defs>
+    <filter id="edge" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="1.2"/></filter>
+    <filter id="ground" x="-30%" y="-100%" width="160%" height="300%"><feGaussianBlur stdDeviation="10"/></filter>
+  </defs>
+  <!-- Координаты исходной визитки: только автомобиль и мягкая контактная тень. -->
+  <ellipse cx="249" cy="432" rx="211" ry="23" fill="white" opacity=".3" filter="url(#ground)"/>
+  <path fill="white" stroke="white" stroke-width="4" stroke-linejoin="round" filter="url(#edge)" d="M24 354Q24 342 31 337L39 313Q45 299 55 291Q85 279 144 268L145 261Q145 255 155 255L176 254L174 249L166 249L166 245L177 242L184 243L222 214Q240 203 270 200L278 193Q291 189 306 193L317 198Q350 198 375 202Q392 200 405 207Q416 210 420 215Q425 220 429 228L440 229L469 228L477 249L470 255L469 262Q479 281 480 315Q480 348 468 369Q465 365 456 374Q447 381 437 374L431 367L366 409Q355 435 328 441Q305 446 290 436L256 449Q233 458 205 455L63 429Q30 415 23 396L24 377L24 371Z"/>
+</svg>
