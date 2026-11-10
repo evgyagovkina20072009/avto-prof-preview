@@ -39,6 +39,6 @@
   #home .hero,
   #home .service-blocks,
   #home .actions{
-    left:calc(4.7vw - 24px - (100vw - 1366px) / 2);
+    left:calc(659px - 45.3vw);
   }
 }
