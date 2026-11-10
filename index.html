@@ -327,7 +327,8 @@ document.addEventListener('keydown',event=>{
   activeTime=null;times.replaceChildren();
   const selected=date.value;
   const now=today();
-  for(let hour=9;hour<=18;hour++){
+  for(let hour=9;hour<18;hour++){
+   if(hour===13)continue;
    const time=String(hour).padStart(2,'0')+':00',busy=count(selected||now,hour);
    const button=document.createElement('button');
    button.type='button';button.className='sto-time';button.disabled=!selected||selected<now||busy===4;
