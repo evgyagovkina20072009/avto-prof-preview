@@ -31,3 +31,14 @@
     width:56%;right:0;bottom:40px;aspect-ratio:1.65;
   }
 }
+
+/* Match the fixed header's viewport-relative logo edge.
+   The 1366px stage is centered independently, so compensate for its offset.
+   Subaru remains anchored to the stage, unchanged. */
+@media (min-width:1200px){
+  #home .hero,
+  #home .service-blocks,
+  #home .actions{
+    left:calc(4.7vw - 24px - (100vw - 1366px) / 2);
+  }
+}
