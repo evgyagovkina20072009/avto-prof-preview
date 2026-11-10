@@ -318,7 +318,7 @@ document.addEventListener('keydown',event=>{
  const feedback=document.getElementById('sto-preview-feedback');
  const close=overlay.querySelector('.sto-close');
  let activeTime=null,previousFocus=null;
- const today=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Yekaterinburg',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+ const today=()=>{const p=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Yekaterinburg',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date()).filter(x=>x.type!=='literal').map(x=>[x.type,x.value]));return p.year+'-'+p.month+'-'+p.day;};
  function count(dateStr,hour){
   const day=Number(dateStr.slice(-2));
   return (day*7+hour*3)%5;
