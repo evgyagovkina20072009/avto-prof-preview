@@ -228,7 +228,7 @@ document.addEventListener('click',function(event){
     panel.classList.add('prices-panel');
     desc.hidden=false;desc.replaceChildren();
     const intro=document.createElement('p');intro.className='price-intro';
-    intro.textContent='Перечень работ для согласования. Цены «от 0 рублей» — временные обозначения, не действующий прайс.';
+    intro.textContent='Перечень работ для согласования. Цены «от нуля рублей» — временные обозначения, не действующий прайс.';
     desc.append(intro);
     groups.forEach(([name,works],index)=>{
       const section=document.createElement('section');section.className='price-group';
@@ -237,7 +237,7 @@ document.addEventListener('click',function(event){
       works.forEach(work=>{
         const item=document.createElement('li');
         const label=document.createElement('span');label.textContent=work;
-        const amount=document.createElement('strong');amount.textContent='от 0 рублей';
+        const amount=document.createElement('strong');amount.textContent='от нуля рублей';
         item.append(label,amount);list.append(item);
       });
       section.append(heading,list);desc.append(section);
