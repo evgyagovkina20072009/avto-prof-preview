@@ -1,12 +1,18 @@
-/* Техническое масштабирование от утверждённого эталона, без новых размеров дизайна. */
+/* Scale the approved composition by available WIDTH only, never by Chrome window height.
+   Preserve its proportions; use natural vertical scroll for shorter desktop windows. */
 (function(){
   const root=document.documentElement;
   function fitApprovedHero(){
-    if(!window.matchMedia('(min-width:761px)').matches){root.style.removeProperty('--hero-reference-scale');return;}
+    if(!window.matchMedia('(min-width:761px)').matches){
+      root.style.removeProperty('--hero-reference-scale');
+      root.style.removeProperty('--hero-required-height');
+      return;
+    }
     const home=document.getElementById('home');
     const width=home?home.clientWidth:root.clientWidth;
-    const height=home?home.clientHeight:window.innerHeight;
-    root.style.setProperty('--hero-reference-scale',String(Math.min(width/1366,height/768)));
+    const scale=Math.min(1,width/1366);
+    root.style.setProperty('--hero-reference-scale',String(scale));
+    root.style.setProperty('--hero-required-height',(768*scale)+'px');
   }
   fitApprovedHero();
   window.addEventListener('resize',fitApprovedHero);
