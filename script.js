@@ -4,7 +4,23 @@
 
 
 /* Навигация и информационное окно. */
-const info={'О нас':'Информация об автосервисе «Авто-Проф» будет добавлена после согласования с владельцем СТО.','Контакты':'Тюмень, Старый Тобольский тракт, 2-й километр, 4а, ворота №2. <a target="_blank" rel="noopener" href="https://2gis.ru/tyumen/geo/70000001099008590">Посмотреть на карте 2ГИС</a>. Телефоны: <a href="tel:+73452589058">+7 (3452) 58-90-58</a> и <a href="tel:+79224887700">+7 (922) 488-77-00</a>.','Запись на СТО':'Это демонстрационная версия. Форма записи будет подключена позже — заявки сейчас не отправляются.','Как мы работаем':'Здесь разместим подробности обслуживания и фотографии мастерской после согласования.'};
+const aboutDetails=`
+  <section class="about-section">
+    <h2>Адрес</h2>
+    <p>Тюмень, Старый Тобольский тракт, 2-й километр, 4а, ворота №2</p>
+    <p><a href="https://2gis.ru/tyumen/geo/70000001099008590" target="_blank" rel="noopener noreferrer">Посмотреть на карте 2ГИС</a></p>
+  </section>
+  <section class="about-section">
+    <h2>Телефоны</h2>
+    <p><a href="tel:+79829476558">+7 982-947-65-58</a></p>
+    <p><a href="tel:+79923106270">+7 992-310-62-70</a></p>
+  </section>
+  <section class="about-section">
+    <h2>Режим работы</h2>
+    <p>Понедельник–вторник: 09:00–18:00</p>
+    <p>Суббота–воскресенье: выходные</p>
+  </section>`;
+const info={'Контакты':'Тюмень, Старый Тобольский тракт, 2-й километр, 4а, ворота №2. <a target="_blank" rel="noopener" href="https://2gis.ru/tyumen/geo/70000001099008590">Посмотреть на карте 2ГИС</a>.','Запись на СТО':'Это демонстрационная версия. Форма записи будет подключена позже — заявки сейчас не отправляются.','Как мы работаем':'Здесь разместим подробности обслуживания и фотографии мастерской после согласования.'};
 // Only genuine reviews approved for publication may be added here.
 // A future backend must enforce authenticity, moderation and spam checks server-side.
 const reviews=[];
@@ -51,6 +67,8 @@ function closeModal(){
   modal.classList.remove('open');
   closeReviewsView();
   closeBookingView();
+  document.getElementById('modal-panel').classList.remove('about-panel');
+  document.getElementById('dt').hidden=false;
   setActive('Главная');
   if(opener) opener.focus({preventScroll:true});
   opener=null;
@@ -102,12 +120,15 @@ document.addEventListener('click',event=>{
   closeBookingView();
   if(section==='Запись на СТО'){openBookingCalendar();return;}
   document.getElementById('dt').textContent=section;
+  const isAbout=section==='О нас';
+  document.getElementById('dt').hidden=isAbout;
+  document.getElementById('modal-panel').classList.toggle('about-panel',isAbout);
   const isReviews=section==='Отзывы';
   reviewsSection.hidden=!isReviews;
   document.getElementById('modal-panel').classList.toggle('reviews-panel',isReviews);
   document.getElementById('desc').hidden=isReviews;
   // The existing contacts dialog previously opened by the parts CTA now belongs to «О нас».
-  document.getElementById('desc').innerHTML=isReviews?'':(section==='О нас'?info['Контакты']:info[section]);
+  document.getElementById('desc').innerHTML=isReviews?'':(isAbout?aboutDetails:(info[section]||''));
   if(isReviews) renderReviews();
   modal.classList.add('open');
   document.getElementById('close').focus({preventScroll:true});
